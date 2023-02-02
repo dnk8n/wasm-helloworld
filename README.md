@@ -1,3 +1,29 @@
+# Project: A Visual Sorting Algorithm Simulator
+
+**Objective:** To build a client-side web application that visualizes popular sorting algorithms and allows the user to interact with and compare the performance of these algorithms on different data sets.
+
+**Functionality:**
+
+The user should be able to select different sorting algorithms from a list (e.g. Bubble sort, Insertion sort, Quick sort, etc.).
+The user should be able to generate random data sets of varying size for the algorithm to sort.
+The user should be able to start, pause, and reset the visualization of the sorting algorithm.
+The visualization should show the current state of the data set, highlighting the elements being compared and swapped.
+The visualization should include statistics such as the number of comparisons and swaps made, the time taken to sort the data set, etc.
+
+**Skills required:**
+
+Strong HTML, CSS, and JavaScript skills.
+Understanding of algorithms and data structures, specifically sorting algorithms.
+Ability to create interactive visualizations with JavaScript.
+Knowledge of performance optimization techniques.
+
+**Deliverables:**
+
+A fully functional client-side web application that implements the specified functionality.
+A brief report explaining the design choices made, challenges faced, and improvements that could be made in the future.
+
+___    
+    
 <div align="center">
 
   <h1><code>wasm-pack-template</code></h1>
