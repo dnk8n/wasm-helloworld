@@ -1,0 +1,41 @@
+name: Deploy Hello World WASM
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Cache directories
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ~/.cargo
+            ./pkg
+            ./target
+          key: ${{ runner.os }}
+
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Build site
+        run: ~/.cargo/bin/wasm-pack build && cp index* ./pkg
+
+      - name: Deploy to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: hello-wasm
+          entrypoint: https://deno.land/std@0.175.0/http/file_server.ts
+          root: ./pkg
+        env:
+          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
