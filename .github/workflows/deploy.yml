@@ -29,13 +29,18 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Build site
-        run: ~/.cargo/bin/wasm-pack build && cp index* ./pkg
+        run: |
+          ~/.cargo/bin/wasm-pack build --target web
+          rm -rf dist
+          mkdir dist
+          cp index* dist/
+          cp -a ./pkg dist/
 
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: hello-wasm
           entrypoint: https://deno.land/std@0.175.0/http/file_server.ts
-          root: ./pkg
+          root: ./dist
         env:
           DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
